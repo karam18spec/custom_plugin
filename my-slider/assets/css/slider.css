@@ -1,0 +1,414 @@
+/* =========================================
+   MY SLIDER - MODERN UI
+========================================= */
+
+.my-slider {
+    position: relative;
+    width: min(100% - 30px, 1100px);
+    height: 600px;
+    margin: 50px auto;
+
+    overflow: hidden;
+    border-radius: 24px;
+
+    background: #111827;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.20),
+        0 10px 25px rgba(0, 0, 0, 0.10);
+
+    isolation: isolate;
+}
+
+
+/* =========================================
+   SLIDES
+========================================= */
+
+.my-slide {
+    position: absolute;
+    inset: 0;
+
+    display: none;
+
+    width: 100%;
+    height: 100%;
+}
+
+.my-slide.active {
+    display: block;
+
+    animation: slideFade 0.7s ease;
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+.my-slide img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.8s ease;
+}
+
+.my-slide.active img {
+    transform: scale(1.03);
+}
+
+
+/* =========================================
+   DARK GRADIENT OVERLAY
+========================================= */
+
+.my-slide::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.75) 0%,
+            rgba(0, 0, 0, 0.35) 45%,
+            rgba(0, 0, 0, 0.05) 100%
+        ),
+
+        linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.55),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.my-slide-content {
+    position: absolute;
+
+    left: 70px;
+    bottom: 110px;
+
+    z-index: 2;
+
+    max-width: 580px;
+
+    color: #fff;
+}
+
+
+/* Small label */
+
+.my-slide-content::before {
+    content: "FEATURED";
+
+    display: inline-block;
+
+    margin-bottom: 18px;
+    padding: 7px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    backdrop-filter: blur(10px);
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+/* Heading */
+
+.my-slide-content h2 {
+    margin: 0 0 15px;
+
+    color: #fff;
+
+    font-size: clamp(32px, 5vw, 58px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Paragraph */
+
+.my-slide-content p {
+    max-width: 500px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   NAVIGATION BUTTONS
+========================================= */
+
+.my-slider-prev,
+.my-slider-next {
+    position: absolute;
+
+    top: 50%;
+
+    z-index: 10;
+
+    width: 52px;
+    height: 52px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(12px);
+
+    color: #fff;
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+.my-slider-prev {
+    left: 25px;
+}
+
+
+.my-slider-next {
+    right: 25px;
+}
+
+
+.my-slider-prev:hover,
+.my-slider-next:hover {
+    background: #ffffff;
+
+    border-color: #ffffff;
+
+    color: #111827;
+
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+/* =========================================
+   DOT NAVIGATION
+========================================= */
+
+.my-slider-dots {
+    position: absolute;
+
+    left: 70px;
+    bottom: 42px;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.my-dot {
+    width: 8px;
+    height: 8px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    cursor: pointer;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+.my-dot:hover {
+    transform: scale(1.2);
+
+    background: rgba(255, 255, 255, 0.8);
+}
+
+
+.my-dot.active {
+    width: 32px;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   SLIDE ANIMATION
+========================================= */
+
+@keyframes slideFade {
+
+    from {
+        opacity: 0;
+        transform: scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .my-slider {
+        height: 500px;
+
+        border-radius: 20px;
+    }
+
+
+    .my-slide-content {
+        left: 45px;
+        bottom: 100px;
+
+        max-width: 500px;
+    }
+
+
+    .my-slider-dots {
+        left: 45px;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .my-slider {
+        width: calc(100% - 20px);
+        height: 460px;
+
+        margin: 30px auto;
+
+        border-radius: 18px;
+    }
+
+
+    .my-slide::after {
+        background:
+            linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.80),
+                rgba(0, 0, 0, 0.05) 75%
+            );
+    }
+
+
+    .my-slide-content {
+        left: 25px;
+        right: 25px;
+        bottom: 85px;
+
+        max-width: none;
+    }
+
+
+    .my-slide-content::before {
+        margin-bottom: 12px;
+
+        padding: 5px 10px;
+
+        font-size: 9px;
+    }
+
+
+    .my-slide-content h2 {
+        margin-bottom: 10px;
+
+        font-size: 34px;
+        letter-spacing: -0.8px;
+    }
+
+
+    .my-slide-content p {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+
+    .my-slider-prev,
+    .my-slider-next {
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+    }
+
+
+    .my-slider-prev {
+        left: 15px;
+    }
+
+
+    .my-slider-next {
+        right: 15px;
+    }
+
+
+    .my-slider-dots {
+        left: 25px;
+        bottom: 30px;
+    }
+
+}
